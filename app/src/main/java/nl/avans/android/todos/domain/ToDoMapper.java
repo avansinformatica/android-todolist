@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public class ToDoMapper {
 
+    // De JSON attributen die we uitlezen
     public static final String TODO_RESULT = "result";
     public static final String TODO_TITLE = "Titel";
     public static final String TODO_DESCRIPTION = "Beschrijving";
@@ -33,20 +34,19 @@ public class ToDoMapper {
             JSONArray jsonArray = response.getJSONArray(TODO_RESULT);
 
             for(int i = 0; i < jsonArray.length(); i++){
-                JSONObject jsonProduct = jsonArray.getJSONObject(i);
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 // Convert stringdate to Date
-                String timestamp = jsonProduct.getString(TODO_CREATED_AT);
+                String timestamp = jsonObject.getString(TODO_CREATED_AT);
                 DateTime todoDateTime = ISODateTimeFormat.dateTimeParser().parseDateTime(timestamp);
 
                 ToDo toDo = new ToDo(
-                    jsonProduct.getString(TODO_TITLE),
-                    jsonProduct.getString(TODO_DESCRIPTION),
-                    jsonProduct.getString(TODO_STATUS),
+                    jsonObject.getString(TODO_TITLE),
+                    jsonObject.getString(TODO_DESCRIPTION),
+                    jsonObject.getString(TODO_STATUS),
                     todoDateTime
                 );
-//                Log.i("ToDoMapper", "ToDo: " + toDo);
-
+                // Log.i("ToDoMapper", "ToDo: " + toDo);
                 result.add(toDo);
             }
         } catch( JSONException ex) {

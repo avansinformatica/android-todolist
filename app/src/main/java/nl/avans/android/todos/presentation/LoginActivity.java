@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 txtLoginErrorMsg.setText("");
 
                 // TODO Checken of username en password niet leeg zijn
+                // momenteel checken we nog niet
 
                 handleLogin(mUsername, mPassword);
             }
@@ -127,11 +128,15 @@ public class LoginActivity extends AppCompatActivity {
         return;
     }
 
+    /**
+     * Handel Volley errors op de juiste manier af.
+     *
+     * @param error Volley error
+     */
     public void handleErrorResponse(VolleyError error) {
         Log.e(TAG, "handleErrorResponse");
 
         if(error instanceof com.android.volley.AuthFailureError) {
-
             String json = null;
             NetworkResponse response = error.networkResponse;
             if (response != null && response.data != null) {
@@ -166,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
         return trimmedString;
     }
 
+    // TODO Verplaats displayMessage naar een centrale 'utility class' voor gebruik in alle classes.
     public void displayMessage(String toastString){
         Toast.makeText(getApplicationContext(), toastString, Toast.LENGTH_LONG).show();
     }

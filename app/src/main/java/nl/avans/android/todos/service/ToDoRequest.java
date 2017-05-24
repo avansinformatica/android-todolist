@@ -61,9 +61,11 @@ public class ToDoRequest {
         if(token != null && !token.equals("dummy default token")) {
 
             Log.i(TAG, "Token gevonden, we gaan het request uitvoeren");
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                    (Request.Method.GET, Config.URL_TODOS, null, new Response.Listener<JSONObject>() {
-
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    Config.URL_TODOS,
+                    null,
+                    new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             // Succesvol response
@@ -71,13 +73,14 @@ public class ToDoRequest {
                             ArrayList<ToDo> result = ToDoMapper.mapToDoList(response);
                             listener.onToDosAvailable(result);
                         }
-                    }, new Response.ErrorListener() {
+                    },
+                    new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // handleErrorResponse(error);
                             Log.e(TAG, error.toString());
                         }
-                    }){
+                    }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
@@ -100,6 +103,7 @@ public class ToDoRequest {
         Log.i(TAG, "handlePostToDo");
 
         // Haal het token uit de prefs
+        // TODO Verplaats het ophalen van het token naar een centraal beschikbare 'utility funtion'
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         final String token = sharedPref.getString(context.getString(R.string.saved_token), "dummy default token");
@@ -114,19 +118,22 @@ public class ToDoRequest {
             try {
                 JSONObject jsonBody = new JSONObject(body);
                 Log.i(TAG, "handlePostToDo - body = " + jsonBody);
-                JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                        (Request.Method.POST, Config.URL_TODOS, jsonBody, new Response.Listener<JSONObject>() {
-
+                JsonObjectRequest jsObjRequest = new JsonObjectRequest(
+                        Request.Method.POST,
+                        Config.URL_TODOS,
+                        jsonBody,
+                        new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Log.i(TAG, response.toString());
                                 // Het toevoegen is gelukt
-                                // Hier kun je kiezen: of een refresh van de hele lijst ophalen
-                                // en de ListView bijwerken ... Of alleen de ene update toevoegen
+                                // Hier kun je kiezen: of een refresh door de hele lijst op te halen
+                                // en de ListView bij te werken ... Of alleen de ene update toevoegen
                                 // aan de ArrayList. Wij doen dat laatste.
                                 listener.onToDoAvailable(newTodo);
                             }
-                        }, new Response.ErrorListener() {
+                        },
+                        new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 // Error - send back to caller
