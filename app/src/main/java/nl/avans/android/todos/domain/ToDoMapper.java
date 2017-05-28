@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +19,7 @@ public class ToDoMapper {
     public static final String TODO_RESULT = "result";
     public static final String TODO_TITLE = "Titel";
     public static final String TODO_DESCRIPTION = "Beschrijving";
-    public static final String TODO_CREATED_AT = "AangemaaktOp";
+    public static final String TODO_UPDATED_AT = "LaatstGewijzigdOp";
     public static final String TODO_STATUS = "Status";
 
     /**
@@ -37,7 +36,7 @@ public class ToDoMapper {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 // Convert stringdate to Date
-                String timestamp = jsonObject.getString(TODO_CREATED_AT);
+                String timestamp = jsonObject.getString(TODO_UPDATED_AT);
                 DateTime todoDateTime = ISODateTimeFormat.dateTimeParser().parseDateTime(timestamp);
 
                 ToDo toDo = new ToDo(

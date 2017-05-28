@@ -3,27 +3,26 @@ package nl.avans.android.todos.domain;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class ToDo implements Serializable {
 
     private String title;
     private String contents;
     private String status;
-    private DateTime createdAt;
+    private DateTime updatedAt;
 
     public ToDo(String title, String contents) {
         this.title = title;
         this.contents = contents;
         this.status = null;
-        this.createdAt = new DateTime();
+        this.updatedAt = new DateTime();
     }
 
-    public ToDo(String title, String contents, String status, DateTime createdAt) {
+    public ToDo(String title, String contents, String status, DateTime updatedAt) {
         this.title = title;
         this.contents = contents;
         this.status = status;
-        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getTitle() {
@@ -50,12 +49,12 @@ public class ToDo implements Serializable {
         this.status = status;
     }
 
-    public DateTime getCreatedAt() {
-        return createdAt;
+    public DateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setCreatedAt(DateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setUpdatedAt(DateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -64,7 +63,7 @@ public class ToDo implements Serializable {
                 "title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
                 ", status='" + status + '\'' +
-                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
