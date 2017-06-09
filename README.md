@@ -12,11 +12,12 @@ Om de gegenereerde analyse online op Sonarqube inzichtelijk te maken moet je de 
 De properties komen overeen met de instellingen van jouw account op sonarcloud.io. Doe daarvoor het volgende:
 
 - Maak een account op [sonarcloud.io](http://www.sonarcloud.io). Inloggen kan met je GitHub account. Rechtsboven in het venster ga je naar jouw account.
-- Default, als je met GitHub inlogt, is er een organisation met de naam 'jouwaccount-github'. Vul deze in bij . Als je dat wilt kun je ook een nieuwe organisation toevoegen.
-- Maak in je account, onder de tab 'Security', een token. Bewaar dat token tijdelijk; je vult het strak 
+- Default, als je met GitHub inlogt, is er een organisation met de naam 'jouwaccount-github'. Vul deze in bij `systemProp.sonar.organization`. Als je dat wilt kun je ook een nieuwe organisation toevoegen.
+- Ga naar jouw organisation. Onder Administration ga je naar 'Projects Management'. Maak hier een nieuw project. Kies logische waarden bij 'Name' en 'Key', en vul 'master' in bij 'Branch'. Deze waarden vul je in bij `systemProp.sonar.projectKey` en `systemProp.sonar.projectName`. Let op hoe de key is genoteerd (met branch erbij).   
+- Maak in je account, onder de tab 'Security', een token en vul dit in bij `systemProp.sonar.login`.
 
 ### Analyse uitvoeren
-Om een analyse uit te voeren en naar SonarQube te publiceren:
+Om een analyse uit te voeren en naar SonarQube te publiceren voer je vanaf de command line uit:
 
 ```
 gradle sonarqube
