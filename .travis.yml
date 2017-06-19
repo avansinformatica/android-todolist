@@ -7,9 +7,17 @@ android:
     - tools
     - build-tools-25.0.2
     - android-25
+
+    # Additional components
     - extra-android-m2repository
+
+licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
 before_install:
   - chmod +x gradlew
 
-script: ./gradlew testDebug
+script:
+  - ./gradlew clean build test
