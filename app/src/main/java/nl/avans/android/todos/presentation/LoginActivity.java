@@ -70,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         String body = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
         Log.i(TAG, "handleLogin - body = " + body);
 
+        Log.i(TAG, "URL = " + Config.URL_LOGIN);
+
         try {
             JSONObject jsonBody = new JSONObject(body);
             JsonObjectRequest jsObjRequest = new JsonObjectRequest
